@@ -1,9 +1,11 @@
 package pl.charmas.android.reactivelocation.sample;
 
+import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -111,7 +113,7 @@ public class PlacesActivity extends ActionBarActivity {
             public void call(AutocompletePredictionBuffer buffer) {
                 List<AutocompleteInfo> infos = new ArrayList<>();
                 for (AutocompletePrediction prediction : buffer) {
-                    infos.add(new AutocompleteInfo(prediction.getDescription(), prediction.getPlaceId()));
+                    infos.add(new AutocompleteInfo(prediction.getFullText(new StyleSpan(Typeface.NORMAL)).toString(), prediction.getPlaceId()));
                 }
                 buffer.release();
                 placeSuggestionsList.setAdapter(new ArrayAdapter<>(PlacesActivity.this, android.R.layout.simple_list_item_1, infos));
